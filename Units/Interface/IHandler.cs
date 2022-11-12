@@ -1,4 +1,4 @@
-﻿namespace OSU_WinForm.Interface
+﻿namespace OSU_WinForm.Units.Interface
 {
     public interface IHandler : IUnit
     {

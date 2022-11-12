@@ -1,8 +1,7 @@
-﻿using System.Data;
-using System.Drawing;
+﻿using System.Drawing;
 using System.Drawing.Drawing2D;
 
-namespace OSU_WinForm
+namespace OSU_WinForm.Units
 {
     public abstract class Unit : IUnit
     {

@@ -1,6 +1,6 @@
 ﻿using System.Drawing;
 
-namespace OSU_WinForm
+namespace OSU_WinForm.Units
 {
     public interface IUnit
     {

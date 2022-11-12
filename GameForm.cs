@@ -1,13 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Timers;
 using System.Windows.Forms;
+using OSU_WinForm.Units.Implementation;
 
 namespace OSU_WinForm
 {
@@ -15,15 +10,15 @@ namespace OSU_WinForm
     {
         private readonly Handler _handler;
         private readonly Target _target;
-        private Point targetDirection;
+        private Point _targetDirection;
         private int _score;
-        private const int _size = 50;
+        private const int UnitSize = 50;
         
         public GameForm()
         {
-            targetDirection = Point.Empty;
-            _handler = new Handler(_size);
-            _target = new Target(_size);
+            _targetDirection = Point.Empty;
+            _handler = new Handler(UnitSize);
+            _target = new Target(UnitSize);
             InitializeComponent();
             SetStyle(ControlStyles.OptimizedDoubleBuffer | ControlStyles.AllPaintingInWmPaint | ControlStyles.UserPaint, true );
             UpdateStyles();
@@ -33,20 +28,20 @@ namespace OSU_WinForm
         }
         private void GameForm_Paint(object sender, PaintEventArgs e)
         {
-            Graphics graphics = e.Graphics;
+            var graphics = e.Graphics;
             var localPosition = this.PointToClient(Cursor.Position);
             _handler.Position.X = localPosition.X;
             _handler.Position.Y = localPosition.Y;
 
-            if (_target.Position.X - _target.Size/2 < 0 || _target.Position.X + _target.Size > Size.Width) targetDirection.X *= -1;
-            if (_target.Position.Y - _target.Size/2 < 0 || _target.Position.Y + _target.Size > Size.Height) targetDirection.Y *= -1;
+            if (_target.Position.X - _target.Size/2 < 0 || _target.Position.X + _target.Size > Size.Width) _targetDirection.X *= -1;
+            if (_target.Position.Y - _target.Size/2 < 0 || _target.Position.Y + _target.Size > Size.Height) _targetDirection.Y *= -1;
 
-            _target.Position.X += targetDirection.X;
-            _target.Position.Y += targetDirection.Y;
+            _target.Position.X += _targetDirection.X;
+            _target.Position.Y += _targetDirection.Y;
 
-            var distans = (_handler.Point.X - _target.Position.X) * (_handler.Position.X - _target.Position.X) +
+            int distance = (_handler.Point.X - _target.Position.X) * (_handler.Position.X - _target.Position.X) +
                           (_handler.Position.Y - _target.Position.Y) * (_handler.Position.Y - _target.Position.Y);
-            if (_size * _size - distans > 0) AddScore(_size * _size - distans); else AddScore(-1000);
+            if (UnitSize * UnitSize - distance > 0) AddScore(UnitSize * UnitSize - distance); else AddScore(-1000);
 
             _handler.Draw(graphics);
             _target.Draw(graphics);
@@ -62,9 +57,9 @@ namespace OSU_WinForm
             timer2.Interval = rnd.Next(100, 5000);
             do
             {
-                targetDirection.X = rnd.Next(-3, 4);
-                targetDirection.Y = rnd.Next(-3, 4);
-            } while (targetDirection.X == 0 && targetDirection.Y == 0);
+                _targetDirection.X = rnd.Next(-3, 4);
+                _targetDirection.Y = rnd.Next(-3, 4);
+            } while (_targetDirection.X == 0 && _targetDirection.Y == 0);
         }
 
         private void AddScore(int score)
