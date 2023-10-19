@@ -68,7 +68,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ActiveBorder;
-            this.BackgroundImage = global::OSU_WinForm.Properties.Resourses.pexels_bruno_thethe_1910225__3_;
+            this.BackgroundImage = global::OSU_WinForm.Properties.Resources.pexels_bruno_thethe_1910229;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(1018, 739);
             this.Controls.Add(this.scoreLabel);
